@@ -1,0 +1,10 @@
+<?php
+
+module_load_include('inc', 'mvc', 'mvc.router'); 
+module_load_include('inc', 'mvc', 'mvc'); 
+
+/**
+ * this is standar drupal module file
+ */
+
+

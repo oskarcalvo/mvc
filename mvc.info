@@ -1,0 +1,5 @@
+name = MVC module
+description = Create custom pages without Views or Panels
+core = 7.x
+php = 5.6
+; dependencies[]  = xautoload
