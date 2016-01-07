@@ -1,20 +1,33 @@
 <?php
-
 namespace mvcLoaderFactory;
-
+use Exception;
 class mvcLoaderFactory {
 	
 	public $class_name;
-	private $base_dir = $_SERVER['DOCUMENT_ROOT'];
 
 	function __construct($class_name){
+    $this->class_name = $class_name;
+  }
 
-			spl_autoload_register ( function ($class_name){
+  public function build(){
 
-			$file = $base_dir . 'libraries/mvc/src/' . $class_name . '/controller' . $class_name .'.php';
-	    if (file_exists($file)) {
-	        require $file;
-	    }
-  	}, TRUE);
+    $class = $this->class_name;
+
+
+    try {
+    spl_autoload_register(function ($class) {
+      include DRUPAL_ROOT. '/sites/all/libraries/mvc/src/' . $class . '/controller.' . $class . '.class.php';
+    });
+    }catch( Exception $e){
+      echo 'Excepción capturada: ',  $e->getMessage(), "\n"; 
+    }
+
+    if (class_exists($class)){
+  
+      return new $class();  
+    }else {
+      $message =  t('The class '. $class . ' don\'t exist');
+      throw new \Exception ($message);
+    }
 	}
 }
