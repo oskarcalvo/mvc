@@ -13,5 +13,5 @@ function _helper_mvc_print_page($arg1, $arg2){
 	$object = new mvcLoaderFactory($arg1);
 
   $newobject = $object->build();  
-  return $arg2 . '  ' . $newobject->{$arg2}();
+  return $newobject->{$arg2}();
 }
